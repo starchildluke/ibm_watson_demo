@@ -4,15 +4,6 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import Features, EntitiesOptions, KeywordsOptions, ConceptsOptions, CategoriesOptions, EmotionOptions, SemanticRolesOptions, SentimentOptions
 import pandas as pd
 
-# Watson credentials
-
-authenticator = IAMAuthenticator('srRUPl2JdMX-iDaSl5QD3f8WTlcGxh1ODKkMYz-rntiz')
-natural_language_understanding = NaturalLanguageUnderstandingV1(
-	version='2020-08-01',
-	authenticator=authenticator)
-
-natural_language_understanding.set_service_url('https://api.eu-gb.natural-language-understanding.watson.cloud.ibm.com/instances/fdd41eee-0c0d-4798-a5cc-652661f59dbc')
-
 # NLP dictionaries
 
 entities_dict = {
@@ -57,6 +48,20 @@ categories_dict = {
 st.title('IBM Watson Natural Language Understanding - Text Analysis')
 
 input_type = st.radio('Select your input type', ['Text','URL'])
+
+api_key = st.text_input('Enter API key')
+endpoint_url = st.text_input('Enter endpoint URL')
+
+# Watson credentials
+
+authenticator = IAMAuthenticator(api_key)
+natural_language_understanding = NaturalLanguageUnderstandingV1(
+	version='2020-08-01',
+	authenticator=authenticator)
+
+natural_language_understanding.set_service_url(endpoint_url)
+
+# Script
 
 if input_type == 'Text':
 	txt = st.text_area('Enter text to be analysed...')
