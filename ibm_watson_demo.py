@@ -47,6 +47,8 @@ categories_dict = {
 
 st.title('IBM Watson Natural Language Understanding - Text Analysis')
 
+st.header('Natural Language Understanding includes a set of text analytics features that you can use to extract meaning from unstructured data. Try your own text or extract text from a URL to analyse using the base model.')
+
 input_type = st.radio('Select your input type', ['Text','URL'])
 
 api_key = st.text_input('Enter API key')
